@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Te Amo</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      overflow: hidden; /* Para impedir o scroll global e criar controle interno */
+    }
+
+    .content-container {
+      width: 100%;
+      max-width: 600px;
+      height: 100%;
+      overflow-y: auto; /* Habilitar rolagem vertical */
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .fixed-image {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      z-index: 10;
+    }
+
+    .message {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .timer {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .gallery img {
+      max-width: 100%;
+      display: none;
+      margin-bottom: 20px;
+    }
+
+    .gallery img.active {
+      display: block;
+    }
+
+    .buttons {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .buttons button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .buttons button:hover {
+      background-color: darkred;
+    }
+
+    /* Estilo para os corações animados */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      opacity: 0.7;
+      clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
+      animation: float 5s infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(calc(-50px + 100px * var(--direction)));
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Contêiner para os corações -->
+  <div id="heart-container"></div>
+
+  <div class="content-container">
+    <!-- Imagem fixa -->
+    <img src="img/carros-esportivos.jpeg" class="fixed-image" alt="Foto Fixa">
+
+    <!-- Mensagem -->
+    <div class="message">
+      Teu amor trouxe significado a todos os conceitos que eu tinha da palavra amar, foi o sentimento mais lindo que eu já tive a honra de viver. Te amo
+    </div>
+
+    <!-- Cronômetro -->
+    <div class="timer" id="timer">Calculando...</div>
+
+    <!-- Galeria de fotos -->
+    <div class="gallery">
+      <img src="img/Lamborghini.jpg" class="active" alt="Foto 1">
+      <img src="img/aston-martin-valour-4.avif" alt="Foto 2">
+      <img src="https://via.placeholder.com/600x400?text=Foto+3" alt="Foto 3">
+      <img src="https://via.placeholder.com/600x400?text=Foto+4" alt="Foto 4">
+      <img src="https://via.placeholder.com/600x400?text=Foto+5" alt="Foto+5">
+      <img src="https://via.placeholder.com/600x400?text=Foto+6" alt="Foto+6">
+      <img src="https://via.placeholder.com/600x400?text=Foto+7" alt="Foto+7">
+      <img src="https://via.placeholder.com/600x400?text=Foto+8" alt="Foto+8">
+      <img src="https://via.placeholder.com/600x400?text=Foto+9" alt="Foto+9">
+      <img src="https://via.placeholder.com/600x400?text=Foto+10" alt="Foto+10">
+      <img src="https://via.placeholder.com/600x400?text=Foto+11" alt="Foto+11">
+      <img src="https://via.placeholder.com/600x400?text=Foto+12" alt="Foto+12">
+      <img src="https://via.placeholder.com/600x400?text=Foto+13" alt="Foto+13">
+      <img src="https://via.placeholder.com/600x400?text=Foto+14" alt="Foto+14">
+      <img src="https://via.placeholder.com/600x400?text=Foto+15" alt="Foto+15">
+    </div>
+    <div class="buttons">
+      <button onclick="previousImage()">Anterior</button>
+      <button onclick="nextImage()">Próxima</button>
+    </div>
+
+    <div class="message">
+      Eu queria muito que você soubesse o quanto é especial pra mim. Queria te dizer que independente de qualquer coisa, você foi uma das melhores pessoas que eu tive a oportunidade de conhecer. A vida me ensinou a valorizar as pessoas, a amar cada uma delas, e principalmente, a cuidar. Você apareceuna minha vida, em um dos momentos em que eu mais precisava de um colo. E você foi o refúgio, diante de tanta guerra externa, e interna. Você é, sem dúvida uma parte de mim. Me desculpa por algumas de nossas brigas, as discussões, mas diante de tudo, saiba que eu te amo. E sempre serei grato por você existir, e cuidar de mim. Pretendo te amar para sempre, mesmo sabendo que sempre é muito tempo.
+    </div>
+  </div>
+
+  <script>
+    // Cronômetro
+    function updateTimer() {
+      const startDate = new Date('2024-09-14');
+      const now = new Date();
+
+      const diffInMilliseconds = now - startDate;
+
+      const totalSeconds = Math.floor(diffInMilliseconds / 1000);
+      const years = Math.floor(totalSeconds / (365.25 * 24 * 60 * 60));
+      const months = Math.floor((totalSeconds % (365.25 * 24 * 60 * 60)) / (30 * 24 * 60 * 60));
+      const days = Math.floor((totalSeconds % (30 * 24 * 60 * 60)) / (24 * 60 * 60));
+      const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+      const seconds = Math.floor(totalSeconds % 60);
+
+      document.getElementById('timer').textContent =
+        `${years} anos, ${months} meses, ${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos desde 14/09/2024`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Galeria
+    const images = document.querySelectorAll('.gallery img');
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    }
+
+    function previousImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }
+
+    // Criando o efeito de corações
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      heart.style.setProperty('--direction', Math.random() > 0.5 ? 1 : -1);
+      document.getElementById('heart-container').appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
